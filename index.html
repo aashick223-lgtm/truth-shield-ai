@@ -4,326 +4,747 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Truth Shield AI</title>
+<meta name="theme-color" content="#07111f">
+<title>Truth Shield AI | Stay Safe Online</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-* {
-  box-sizing: border-box;
+:root {
+  --bg: #050b16;
+  --panel: #0c192b;
+  --panel2: #102238;
+  --cyan: #35e6ff;
+  --blue: #638bff;
+  --text: #effaff;
+  --muted: #a5b9ce;
+  --border: rgba(53,230,255,.22);
+  --green: #48f0a5;
+  --red: #ff7185;
 }
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #071426;
-  color: white;
+  font-family: 'Poppins', Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 10% 0%, #102b48 0%, transparent 42%),
+    radial-gradient(ellipse at 95% 30%, #16143c 0%, transparent 35%),
+    var(--bg);
+  min-height: 100vh;
+}
+
+button, textarea, select { font: inherit; }
+
+button { cursor: pointer; }
+
+.container {
+  width: min(100% - 28px, 850px);
+  margin: auto;
 }
 
 header {
-  padding: 22px 16px;
-  text-align: center;
-  background: #10294a;
-  border-bottom: 2px solid #21d4a4;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(5,11,22,.91);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
 }
 
-.logo {
-  font-size: 42px;
+.nav {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-header h1 {
-  margin: 8px 0;
-  color: #42e8bd;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -.5px;
 }
 
-header p {
-  color: #d2deed;
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 14px;
+  background: linear-gradient(140deg, #153d5b, #182052);
+  border: 1px solid var(--cyan);
+  box-shadow: 0 0 20px #35e6ff20;
+  font-size: 24px;
 }
 
-select, textarea, button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 10px;
-  border-radius: 10px;
-  font-size: 16px;
+.brand span { color: var(--cyan); }
+
+select {
+  max-width: 135px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 8px;
+  font-size: 12px;
+  outline: none;
 }
 
-select, textarea {
-  background: #132943;
+select option {
+  background: var(--panel);
   color: white;
-  border: 1px solid #49617b;
 }
 
-textarea {
-  min-height: 120px;
-  resize: vertical;
+.hero {
+  text-align: center;
+  padding: 46px 0 30px;
 }
 
-main {
-  max-width: 650px;
-  margin: auto;
-  padding: 18px;
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--border);
+  background: #102238b8;
+  color: var(--cyan);
+  border-radius: 50px;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.hero h1 {
+  margin: 20px 0 12px;
+  font-size: clamp(32px, 8vw, 52px);
+  line-height: 1.16;
+  font-weight: 800;
+  letter-spacing: -1.7px;
+}
+
+.gradient-text {
+  color: var(--cyan);
+  text-shadow: 0 0 28px #35e6ff35;
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+  max-width: 590px;
+  margin: 0 auto 22px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 12px 16px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  color: #04111c;
+  background: linear-gradient(100deg, var(--cyan), #8af4ff);
+  box-shadow: 0 0 22px #35e6ff20;
+}
+
+.btn-secondary {
+  color: var(--text);
+  background: var(--panel);
+}
+
+.section-heading {
+  margin: 30px 0 16px;
+}
+
+.section-heading h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+}
+
+.section-heading p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
 }
 
 .card {
-  background: #10233b;
-  border: 1px solid #263f5d;
-  padding: 18px;
-  margin: 18px 0;
-  border-radius: 16px;
+  min-width: 0;
+  padding: 21px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #102138eF, #091525f5);
+  box-shadow: 0 8px 32px #00000018;
+  transition: border-color .2s, transform .2s;
 }
 
-.card h2 {
-  color: #42e8bd;
-  font-size: 21px;
+.card:hover {
+  border-color: #35e6ff70;
+  transform: translateY(-2px);
 }
 
-button {
-  background: #20d5a5;
-  color: #061629;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 15px;
 }
 
-button:active {
-  transform: scale(0.98);
+.feature-icon {
+  width: 51px;
+  height: 51px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 15px;
+  background: #14364c;
+  border: 1px solid #35e6ff35;
+  font-size: 26px;
 }
+
+.card h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+}
+
+.card-top p {
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+label {
+  display: block;
+  margin: 12px 0 8px;
+  font-size: 12px;
+  color: #d8f6ff;
+  font-weight: 600;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  min-height: 112px;
+  resize: vertical;
+  padding: 13px;
+  border-radius: 12px;
+  border: 1px solid #29465e;
+  background: #050d19;
+  color: var(--text);
+  outline: none;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+textarea:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px #35e6ff12;
+}
+
+textarea::placeholder { color: #70879c; }
+
+.full-btn { width: 100%; margin-top: 12px; }
 
 .result {
+  display: none;
   margin-top: 14px;
   padding: 14px;
-  background: #192f49;
-  border-radius: 10px;
-  line-height: 1.6;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #071522;
+  font-size: 13px;
+  line-height: 1.8;
   overflow-wrap: anywhere;
 }
 
-.note {
-  color: #c1d1e4;
+.result.show { display: block; }
+
+.result strong {
+  display: block;
+  margin-bottom: 5px;
   font-size: 14px;
-  line-height: 1.6;
+}
+
+.result small {
+  display: block;
+  color: var(--muted);
+  margin-top: 7px;
+}
+
+.tips {
+  display: grid;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #071522;
+  border: 1px solid #1c344b;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.tip span { font-size: 19px; }
+
+.tip strong { color: var(--cyan); }
+
+.notice {
+  padding: 14px;
+  margin-top: 15px;
+  border-radius: 12px;
+  background: #10263b;
+  color: #c5eaff;
+  font-size: 11px;
+  line-height: 1.9;
+  border: 1px solid var(--border);
+}
+
+.cyber {
+  margin: 27px 0;
+  padding: 23px;
+  text-align: center;
+  border: 1px solid #35e6ff55;
+  border-radius: 20px;
+  background: linear-gradient(120deg, #102b40, #151832);
+  box-shadow: 0 0 30px #35e6ff0c;
+}
+
+.cyber h2 {
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+
+.cyber p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.cyber-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.author {
+  margin: 18px 0 0;
+  padding-top: 15px;
+  border-top: 1px solid var(--border);
+  color: var(--cyan);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
 }
 
 footer {
   text-align: center;
-  padding: 25px;
-  color: #bdcde0;
+  padding: 15px 0 30px;
+  color: #8197ad;
+  font-size: 11px;
+  line-height: 2;
+}
+
+@media (min-width: 620px) {
+  .feature-grid { grid-template-columns: 1fr 1fr; }
+  .wide-card { grid-column: 1 / -1; }
+  .cyber-actions { grid-template-columns: 1fr 1fr; }
+  .hero { padding-top: 60px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
 }
 </style>
 </head>
 
 <body>
-
 <header>
-  <div class="logo">🛡️</div>
-  <h1>Truth Shield AI</h1>
-  <p>Your Digital Safety Companion</p>
-  <label for="language">Choose Language / மொழி தேர்வு</label>
-  <select id="language" onchange="changeLanguage()">
-    <option value="en">English</option>
-    <option value="ta">தமிழ்</option>
-    <option value="th">Thanglish</option>
-  </select>
+  <div class="container nav">
+    <div class="brand">
+      <div class="brand-icon">🛡️</div>
+      <div>TRUTH <span>SHIELD AI</span></div>
+    </div>
+
+    <select id="language" aria-label="Choose language">
+      <option value="en">🌐 English</option>
+      <option value="ta">🌐 தமிழ்</option>
+      <option value="th">🌐 Thanglish</option>
+    </select>
+  </div>
 </header>
 
-<main>
+<main class="container">
+  <section class="hero">
+    <div class="pill" id="heroPill">✨ YOUR DIGITAL SAFETY COMPANION</div>
 
-<section class="card">
-  <h2 id="welcome">Stay Safe. Think Before You Trust.</h2>
-  <p id="intro">Check suspicious messages, learn call safety, and verify news carefully.</p>
-  <p class="note" id="warning">
-    This first version uses simple warning rules. It cannot guarantee whether
-    a message or news story is true or false.
-  </p>
-</section>
+    <h1>
+      <span id="heroLine1">Think Smart.</span><br>
+      <span class="gradient-text" id="heroLine2">Stay Safe Online. 🚀</span>
+    </h1>
 
-<section class="card">
-  <h2 id="msgTitle">📩 Scam Message Checker</h2>
-  <p id="msgDesc">Paste a suspicious SMS, WhatsApp message, or email.</p>
-  <textarea id="message" placeholder="Paste your message here..."></textarea>
-  <button onclick="checkMessage()" id="msgBtn">Check Message</button>
-  <div id="messageResult" class="result" hidden></div>
-</section>
+    <p id="heroDesc">
+      Detect suspicious messages, learn how to handle scam calls,
+      and check questionable news before you share it.
+    </p>
 
-<section class="card">
-  <h2 id="callTitle">📞 Scam Call Safety</h2>
-  <p id="callDesc">Received a suspicious phone call? Follow these safety steps.</p>
-  <button onclick="showCallSafety()" id="callBtn">Show Safety Tips</button>
-  <div id="callResult" class="result" hidden></div>
-</section>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#tools" id="startBtn">🔍 Get Started</a>
+      <a class="btn btn-secondary" href="#cyber" id="helpBtn">🆘 Cyber Help</a>
+    </div>
+  </section>
 
-<section class="card">
-  <h2 id="newsTitle">📰 Fake News Verification</h2>
-  <p id="newsDesc">Paste a news claim to get a basic risk warning.</p>
-  <textarea id="news" placeholder="Paste a news claim here..."></textarea>
-  <button onclick="checkNews()" id="newsBtn">Check News</button>
-  <div id="newsResult" class="result" hidden></div>
-</section>
+  <section id="tools">
+    <div class="section-heading">
+      <h2 id="toolsTitle">🚀 Your Safety Toolkit</h2>
+      <p id="toolsDesc">Simple tools to help you stay alert and informed.</p>
+    </div>
 
-<section class="card">
-  <h2 id="helpTitle">🔐 Golden Safety Rules</h2>
-  <ul id="safetyList">
-    <li>Never share OTP, PIN, or passwords.</li>
-    <li>Never install apps at a stranger's request.</li>
-    <li>Do not transfer money because of threats.</li>
-    <li>Verify news with multiple reliable sources.</li>
-    <li>Ask a trusted person if you are unsure.</li>
-  </ul>
-</section>
+    <div class="feature-grid">
+      <article class="card">
+        <div class="card-top">
+          <div class="feature-icon">🚨</div>
+          <div>
+            <h3 id="scamTitle">Scam Message Detector</h3>
+            <p id="scamSub">Spot suspicious warning signs</p>
+          </div>
+        </div>
 
-<section class="card">
-  <h2 id="reportTitle">🚨 Report Cyber Fraud (India)</h2>
-  <p id="reportDesc">If money has been lost to cyber fraud, contact the official helpline immediately.</p>
-  <p><strong>Cyber Fraud Helpline: 1930</strong></p>
-  <p>Official website: <a href="https://www.cybercrime.gov.in" target="_blank" rel="noopener noreferrer" style="color:#42e8bd">cybercrime.gov.in</a></p>
-  <p class="note" id="reportNote">Use official channels. Never share your OTP with anyone claiming to help.</p>
-</section>
+        <label for="scamInput" id="scamLabel">📩 Paste your message</label>
+        <textarea id="scamInput" placeholder="Paste a suspicious SMS or message here..."></textarea>
+        <button class="btn btn-primary full-btn" id="scamBtn" type="button" onclick="checkScam()">🔎 Check Message</button>
+        <div class="result" id="scamResult" aria-live="polite"></div>
+      </article>
 
+      <article class="card">
+        <div class="card-top">
+          <div class="feature-icon">📰</div>
+          <div>
+            <h3 id="newsTitle">Fake News Checker</h3>
+            <p id="newsSub">Review questionable claims</p>
+          </div>
+        </div>
+
+        <label for="newsInput" id="newsLabel">📝 Enter a news claim</label>
+        <textarea id="newsInput" placeholder="Paste a news claim you want to review..."></textarea>
+        <button class="btn btn-primary full-btn" id="newsBtn" type="button" onclick="checkNews()">🔍 Review Claim</button>
+        <div class="result" id="newsResult" aria-live="polite"></div>
+      </article>
+
+      <article class="card wide-card">
+        <div class="card-top">
+          <div class="feature-icon">📞</div>
+          <div>
+            <h3 id="callTitle">Scam Call Safety</h3>
+            <p id="callSub">Stay calm. Protect your details.</p>
+          </div>
+        </div>
+
+        <div class="tips">
+          <div class="tip"><span>🔐</span><div><strong id="tip1Title">Never share OTP or PIN</strong><br><span id="tip1Desc">Banks will not ask you to reveal your secret PIN or OTP over a call.</span></div></div>
+          <div class="tip"><span>⛔</span><div><strong id="tip2Title">Don't rush into action</strong><br><span id="tip2Desc">Scammers may threaten you or promise prizes to pressure you.</span></div></div>
+          <div class="tip"><span>☎️</span><div><strong id="tip3Title">Verify independently</strong><br><span id="tip3Desc">Hang up and contact the organisation using its official number.</span></div></div>
+          <div class="tip"><span>🛡️</span><div><strong id="tip4Title">Act quickly if money is lost</strong><br><span id="tip4Desc">Contact your bank and India's cybercrime helpline at 1930.</span></div></div>
+        </div>
+
+        <div class="notice" id="callNotice">💡 Tip: Never install screen-sharing apps or reveal passwords at the request of an unknown caller.</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="cyber" id="cyber">
+    <div style="font-size:36px">🆘</div>
+    <h2 id="cyberTitle">Cyber Report & Help</h2>
+    <p id="cyberDesc">If you suspect cybercrime, use official channels to report it and seek help.</p>
+
+    <div class="cyber-actions">
+      <a class="btn btn-primary" href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer" id="reportBtn">🚨 Report Cybercrime</a>
+      <a class="btn btn-secondary" href="tel:1930" id="helplineBtn">📞 Call Helpline 1930</a>
+    </div>
+
+    <p class="notice" id="cyberNotice">🇮🇳 For financial cyber fraud in India, call 1930 as soon as possible and report through the official portal. Never share OTPs or banking PINs.</p>
+
+    <div class="author">✍️ By MD AASHICK</div>
+  </section>
 </main>
 
-<footer>
-  🛡️ Truth Shield AI | Think Before You Trust
-  <p>Educational safety tool — not a guarantee of authenticity.</p>
+<footer class="container">
+  <div id="footerText">🛡️ Stay alert. Think before you click. Protect your digital world.</div>
+  <div>Truth Shield AI · Awareness & Safety Tool</div>
 </footer>
 
 <script>
 const translations = {
 en: {
-welcome:"Stay Safe. Think Before You Trust.",
-intro:"Check suspicious messages, learn call safety, and verify news carefully.",
-warning:"This first version uses simple warning rules. It cannot guarantee whether a message or news story is true or false.",
-msgTitle:"📩 Scam Message Checker",
-msgDesc:"Paste a suspicious SMS, WhatsApp message, or email.",
-msgBtn:"Check Message",
-msgPlaceholder:"Paste your message here...",
-callTitle:"📞 Scam Call Safety",
-callDesc:"Received a suspicious phone call? Follow these safety steps.",
-callBtn:"Show Safety Tips",
-newsTitle:"📰 Fake News Verification",
-newsDesc:"Paste a news claim to get a basic risk warning.",
-newsBtn:"Check News",
-newsPlaceholder:"Paste a news claim here...",
-helpTitle:"🔐 Golden Safety Rules",
-reportTitle:"🚨 Report Cyber Fraud (India)",
-reportDesc:"If money has been lost to cyber fraud, contact the official helpline immediately.",
-reportNote:"Use official channels. Never share your OTP with anyone claiming to help.",
-tips:["Never share OTP, PIN, or passwords.","Never install apps at a stranger's request.","Do not transfer money because of threats.","Verify news with multiple reliable sources.","Ask a trusted person if you are unsure."]
+  heroPill:"✨ YOUR DIGITAL SAFETY COMPANION",
+  heroLine1:"Think Smart.", heroLine2:"Stay Safe Online. 🚀",
+  heroDesc:"Detect suspicious messages, learn how to handle scam calls, and check questionable news before you share it.",
+  startBtn:"🔍 Get Started", helpBtn:"🆘 Cyber Help",
+  toolsTitle:"🚀 Your Safety Toolkit", toolsDesc:"Simple tools to help you stay alert and informed.",
+  scamTitle:"Scam Message Detector", scamSub:"Spot suspicious warning signs",
+  scamLabel:"📩 Paste your message", scamPlaceholder:"Paste a suspicious SMS or message here...",
+  scamBtn:"🔎 Check Message",
+  newsTitle:"Fake News Checker", newsSub:"Review questionable claims",
+  newsLabel:"📝 Enter a news claim", newsPlaceholder:"Paste a news claim you want to review...",
+  newsBtn:"🔍 Review Claim",
+  callTitle:"Scam Call Safety", callSub:"Stay calm. Protect your details.",
+  tip1Title:"Never share OTP or PIN", tip1Desc:"Banks will not ask you to reveal your secret PIN or OTP over a call.",
+  tip2Title:"Don't rush into action", tip2Desc:"Scammers may threaten you or promise prizes to pressure you.",
+  tip3Title:"Verify independently", tip3Desc:"Hang up and contact the organisation using its official number.",
+  tip4Title:"Act quickly if money is lost", tip4Desc:"Contact your bank and India's cybercrime helpline at 1930.",
+  callNotice:"💡 Tip: Never install screen-sharing apps or reveal passwords at the request of an unknown caller.",
+  cyberTitle:"Cyber Report & Help", cyberDesc:"If you suspect cybercrime, use official channels to report it and seek help.",
+  reportBtn:"🚨 Report Cybercrime", helplineBtn:"📞 Call Helpline 1930",
+  cyberNotice:"🇮🇳 For financial cyber fraud in India, call 1930 as soon as possible and report through the official portal. Never share OTPs or banking PINs.",
+  footerText:"🛡️ Stay alert. Think before you click. Protect your digital world.",
+  scamEmpty:"⚠️ Please enter a message first.",
+  scamHigh:"🚨 Suspicious warning signs detected",
+  scamLow:"🟡 No obvious warning words detected",
+  scamHighDesc:"This message contains words or phrases commonly used in scams. Do not click links, pay money, or share OTPs. Verify through an official channel.",
+  scamLowDesc:"This simple check found fewer common warning signs. That does not prove the message is safe. Check the sender and links carefully.",
+  newsEmpty:"⚠️ Please enter a news claim first.",
+  newsResult:"🔎 Verification needed",
+  newsDesc:"This tool cannot confirm whether a news claim is true or false. Check multiple trusted news sources and official announcements before sharing.",
+  safe:"Safety reminder: Never share OTPs, passwords, or banking PINs.",
+  patterns:"Possible warning signs: ",
+  urgency:"urgent or threatening language",
+  money:"money or prize promises",
+  secrets:"requests for OTPs, PINs, or passwords",
+  links:"suspicious link or payment request",
+  newsTip:"🔍 Search the exact claim, check its date and original source, and compare reliable reports. Do not treat this result as a fact-check."
 },
 ta: {
-welcome:"பாதுகாப்பாக இருங்கள். யோசித்து நம்புங்கள்.",
-intro:"சந்தேகமான மெசேஜ்களைச் சரிபார்த்து, அழைப்பு பாதுகாப்பு மற்றும் செய்திகளைப் பற்றி தெரிந்துகொள்ளுங்கள்.",
-warning:"இந்த முதல் பதிப்பு எளிய விதிகளைப் பயன்படுத்துகிறது. செய்தி உண்மையா பொய்யா என்பதை உறுதியாகக் கூற முடியாது.",
-msgTitle:"📩 மோசடி மெசேஜ் சரிபார்ப்பு",
-msgDesc:"சந்தேகமான SMS அல்லது WhatsApp மெசேஜை இங்கே பதிவிடுங்கள்.",
-msgBtn:"மெசேஜை சரிபார்",
-msgPlaceholder:"மெசேஜை இங்கே பதிவிடுங்கள்...",
-callTitle:"📞 மோசடி அழைப்பு பாதுகாப்பு",
-callDesc:"சந்தேகமான அழைப்பு வந்ததா? பாதுகாப்பு வழிமுறைகளைப் பாருங்கள்.",
-callBtn:"பாதுகாப்பு வழிகளைக் காட்டு",
-newsTitle:"📰 போலிச் செய்தி சரிபார்ப்பு",
-newsDesc:"செய்தியைப் பதிவிட்டு அடிப்படை எச்சரிக்கையைப் பெறுங்கள்.",
-newsBtn:"செய்தியைச் சரிபார்",
-newsPlaceholder:"செய்தியை இங்கே பதிவிடுங்கள்...",
-helpTitle:"🔐 முக்கியமான பாதுகாப்பு விதிகள்",
-reportTitle:"🚨 சைபர் மோசடியைப் புகாரளிக்கவும்",
-reportDesc:"சைபர் மோசடியில் பணத்தை இழந்தால் உடனடியாக அதிகாரப்பூர்வ உதவி எண்ணைத் தொடர்புகொள்ளுங்கள்.",
-reportNote:"அதிகாரப்பூர்வ வழிகளைப் பயன்படுத்துங்கள். OTP-ஐ யாரிடமும் பகிர வேண்டாம்.",
-tips:["OTP, PIN, கடவுச்சொல்லை யாரிடமும் பகிர வேண்டாம்.","தெரியாதவர் சொல்வதற்காக ஆப் நிறுவ வேண்டாம்.","மிரட்டலுக்கு பயந்து பணம் அனுப்ப வேண்டாம்.","பல நம்பகமான ஆதாரங்களில் செய்தியைச் சரிபார்க்கவும்.","சந்தேகம் இருந்தால் நம்பகமானவரிடம் ஆலோசனை கேளுங்கள்."]
+  heroPill:"✨ உங்களின் டிஜிட்டல் பாதுகாப்புத் துணை",
+  heroLine1:"சிந்தித்துச் செயல்படுங்கள்.", heroLine2:"ஆன்லைனில் பாதுகாப்பாக இருங்கள்! 🚀",
+  heroDesc:"சந்தேகமான செய்திகளைக் கவனியுங்கள். மோசடி அழைப்புகளைச் சமாளிக்கவும், செய்திகளைப் பகிர்வதற்கு முன் சரிபார்க்கவும்.",
+  startBtn:"🔍 தொடங்கலாம்", helpBtn:"🆘 சைபர் உதவி",
+  toolsTitle:"🚀 பாதுகாப்புக் கருவிகள்", toolsDesc:"விழிப்புடன் இருக்க உதவும் எளிய கருவிகள்.",
+  scamTitle:"மோசடி செய்தி கண்டறிதல்", scamSub:"சந்தேக அறிகுறிகளைக் கவனியுங்கள்",
+  scamLabel:"📩 செய்தியைப் பதிவிடுங்கள்", scamPlaceholder:"சந்தேகமான SMS அல்லது செய்தியை இங்கே பதிவிடுங்கள்...",
+  scamBtn:"🔎 செய்தியைச் சரிபார்க்கவும்",
+  newsTitle:"போலி செய்தி சரிபார்ப்பு", newsSub:"சந்தேகமான தகவலை மதிப்பிடுங்கள்",
+  newsLabel:"📝 செய்தித் தகவலை உள்ளிடுங்கள்", newsPlaceholder:"சரிபார்க்க வேண்டிய செய்தியை இங்கே பதிவிடுங்கள்...",
+  newsBtn:"🔍 தகவலை மதிப்பிடுங்கள்",
+  callTitle:"மோசடி அழைப்புப் பாதுகாப்பு", callSub:"அமைதியாக இருங்கள். உங்கள் தகவல்களைப் பாதுகாக்கவும்.",
+  tip1Title:"OTP அல்லது PIN பகிர வேண்டாம்", tip1Desc:"வங்கிகள் தொலைபேசியில் உங்கள் ரகசிய PIN அல்லது OTP-ஐக் கேட்கக் கூடாது.",
+  tip2Title:"அவசரமாகச் செயல்பட வேண்டாம்", tip2Desc:"மோசடிக்காரர்கள் மிரட்டலாம் அல்லது பரிசு தருவதாகக் கூறலாம்.",
+  tip3Title:"அதிகாரப்பூர்வமாகச் சரிபார்க்கவும்", tip3Desc:"அழைப்பைத் துண்டித்து, நிறுவனத்தின் அதிகாரப்பூர்வ எண்ணைத் தொடர்புகொள்ளுங்கள்.",
+  tip4Title:"பணம் இழந்தால் விரைவாகச் செயல்படுங்கள்", tip4Desc:"உங்கள் வங்கியையும் இந்திய சைபர் குற்ற உதவி எண் 1930-ஐயும் தொடர்புகொள்ளுங்கள்.",
+  callNotice:"💡 குறிப்பு: தெரியாத அழைப்பாளரின் வேண்டுகோளுக்கு இணங்க screen-sharing செயலிகளை நிறுவவோ கடவுச்சொற்களைப் பகிரவோ வேண்டாம்.",
+  cyberTitle:"சைபர் புகார் மற்றும் உதவி", cyberDesc:"சைபர் குற்றம் எனச் சந்தேகித்தால் அதிகாரப்பூர்வ வழிகளில் புகார் அளிக்கவும்.",
+  reportBtn:"🚨 சைபர் புகார் அளிக்கவும்", helplineBtn:"📞 உதவி எண் 1930",
+  cyberNotice:"🇮🇳 இந்தியாவில் பணம் தொடர்பான சைபர் மோசடி நடந்தால் விரைவாக 1930-ஐ அழைத்து அதிகாரப்பூர்வ இணையதளத்தில் புகார் அளிக்கவும். OTP அல்லது PIN பகிர வேண்டாம்.",
+  footerText:"🛡️ விழிப்புடன் இருங்கள். கிளிக் செய்வதற்கு முன் சிந்தியுங்கள்.",
+  scamEmpty:"⚠️ முதலில் ஒரு செய்தியை உள்ளிடுங்கள்.",
+  scamHigh:"🚨 சந்தேகமான அறிகுறிகள் உள்ளன",
+  scamLow:"🟡 பொதுவான எச்சரிக்கைச் சொற்கள் கண்டறியப்படவில்லை",
+  scamHighDesc:"இந்தச் செய்தியில் மோசடிகளில் பயன்படுத்தப்படும் சில சொற்கள் உள்ளன. இணைப்பைக் கிளிக் செய்யவோ பணம் அனுப்பவோ OTP பகிரவோ வேண்டாம். அதிகாரப்பூர்வமாகச் சரிபார்க்கவும்.",
+  scamLowDesc:"பொதுவான எச்சரிக்கைச் சொற்கள் குறைவாக உள்ளன. இதனால் செய்தி பாதுகாப்பானது என்று உறுதியாகக் கூற முடியாது.",
+  newsEmpty:"⚠️ முதலில் செய்தித் தகவலை உள்ளிடுங்கள்.",
+  newsResult:"🔎 சரிபார்ப்பு தேவை",
+  newsDesc:"இந்தக் கருவியால் செய்தி உண்மையா பொய்யா என்று உறுதிப்படுத்த முடியாது. பகிர்வதற்கு முன் நம்பகமான செய்தி மூலங்களையும் அதிகாரப்பூர்வ அறிவிப்புகளையும் ஒப்பிடுங்கள்.",
+  safe:"பாதுகாப்புக் குறிப்பு: OTP, கடவுச்சொல் அல்லது வங்கி PIN-ஐப் பகிர வேண்டாம்.",
+  patterns:"சாத்தியமான எச்சரிக்கை அறிகுறிகள்: ",
+  urgency:"அவசரப்படுத்தும் அல்லது மிரட்டும் சொற்கள்",
+  money:"பணம் அல்லது பரிசு வாக்குறுதிகள்",
+  secrets:"OTP, PIN அல்லது கடவுச்சொல் கேட்பது",
+  links:"சந்தேகமான இணைப்பு அல்லது பணம் செலுத்தும் கோரிக்கை",
+  newsTip:"🔍 தகவலை அப்படியே தேடுங்கள்; தேதி, மூலத்தைச் சரிபார்த்து நம்பகமான செய்திகளுடன் ஒப்பிடுங்கள்."
 },
 th: {
-welcome:"Safe-ah iru. Yosichu nambu!",
-intro:"Suspicious message check pannu, call safety tips paaru, news verify pannu.",
-warning:"Idhu basic warning rules use pannum first version. Message true-ah false-ah nu guarantee panna mudiyadhu.",
-msgTitle:"📩 Scam Message Checker",
-msgDesc:"Doubt-aana SMS, WhatsApp message illa email-ah paste pannu.",
-msgBtn:"Message Check Pannu",
-msgPlaceholder:"Message-ah inga paste pannu...",
-callTitle:"📞 Scam Call Safety",
-callDesc:"Suspicious call vandhucha? Indha safety tips follow pannu.",
-callBtn:"Safety Tips Kaatu",
-newsTitle:"📰 Fake News Verification",
-newsDesc:"News claim-ah paste panni basic warning check pannu.",
-newsBtn:"News Check Pannu",
-newsPlaceholder:"News-ah inga paste pannu...",
-helpTitle:"🔐 Mukkiyamaana Safety Rules",
-reportTitle:"🚨 Cyber Fraud Report (India)",
-reportDesc:"Cyber fraud-la money poirundha udane official helpline-ah contact pannu.",
-reportNote:"Official channels mattum use pannu. Help panrom nu solravanga kittayum OTP share pannadha.",
-tips:["OTP, PIN, password yaar kittayum share pannadha.","Theriyaadhavanga sonna app install pannadha.","Threat pannina bayandhu money transfer pannadha.","Reliable sources-la news verify pannu.","Doubt irundha trusted person kitta kelu."]
+  heroPill:"✨ UNGAL DIGITAL SAFETY COMPANION",
+  heroLine1:"Smart-ah Think Pannu.", heroLine2:"Online-la Safe-ah Iru! 🚀",
+  heroDesc:"Scam messages-ah check pannu, scam calls-ah eppadi handle pannanum nu therinjuko, news share pannurathukku munnaadi verify pannu.",
+  startBtn:"🔍 Start Pannalam", helpBtn:"🆘 Cyber Help",
+  toolsTitle:"🚀 Un Safety Toolkit", toolsDesc:"Safe-ah irukka help pannura simple tools.",
+  scamTitle:"Scam Message Detector", scamSub:"Suspicious signs-ah kandupidi",
+  scamLabel:"📩 Message-ah paste pannu", scamPlaceholder:"Suspicious SMS illa message-ah inga paste pannu...",
+  scamBtn:"🔎 Check Message",
+  newsTitle:"Fake News Checker", newsSub:"Doubt-aana news-ah review pannu",
+  newsLabel:"📝 News claim-ah enter pannu", newsPlaceholder:"Check panna vendiya news-ah inga paste pannu...",
+  newsBtn:"🔍 Review Claim",
+  callTitle:"Scam Call Safety", callSub:"Calm-ah iru. Un details-ah protect pannu.",
+  tip1Title:"OTP / PIN share pannaadha", tip1Desc:"Bank call-la un secret PIN illa OTP-ah yaar kitayum sollaadha.",
+  tip2Title:"Avasa pattu act pannaadha", tip2Desc:"Scammers bayamuruthalaam illa prize tharom nu sollalaam.",
+  tip3Title:"Official-ah verify pannu", tip3Desc:"Call cut pannitu organisation-oda official number-ku call pannu.",
+  tip4Title:"Money lose aana seekiram act pannu", tip4Desc:"Un bank-ah contact pannu; India cybercrime helpline 1930-ku call pannu.",
+  callNotice:"💡 Tip: Unknown caller sonna screen-sharing apps install pannaadha; password-ah share pannaadha.",
+  cyberTitle:"Cyber Report & Help", cyberDesc:"Cybercrime nu doubt irundha official channel-la report panni help kelu.",
+  reportBtn:"🚨 Report Cybercrime", helplineBtn:"📞 Call Helpline 1930",
+    cyberNotice:"🇮🇳 India-la money fraud nadandha seekiram 1930-ku call panni official portal-la report pannu. OTP / PIN share pannaadha.",
+  footerText:"🛡️ Alert-ah iru da. Click pannurathukku munnaadi think pannu!",
+  scamEmpty:"⚠️ First oru message enter pannu da.",
+  scamHigh:"🚨 Suspicious signs detected!",
+  scamLow:"🟡 Common warning words detect aagala.",
+  scamHighDesc:"Indha message-la scam-ku use pannura words irukkalaam. Link click pannaadha, money send pannaadha, OTP share pannaadha. Official-ah verify pannu.",
+  scamLowDesc:"Common warning signs kammiya irukku. Aana message safe-nu confirm panna mudiyadhu.",
+  newsEmpty:"⚠️ First oru news claim enter pannu da.",
+  newsResult:"🔎 Verification needed",
+  newsDesc:"Indha tool news true-ah fake-ah nu confirm pannaadhu. Share pannurathukku munnaadi trusted news sources-la verify pannu.",
+  safe:"🛡️ Safety reminder: OTP, password, banking PIN share pannaadha.",
+  patterns:"Possible warning signs: ",
+  urgency:"Urgent-ah pesuradhu illa threaten pannuradhu",
+  money:"Money illa prize offer",
+  secrets:"OTP, PIN illa password kekkuradhu",
+  links:"Suspicious link illa payment request",
+  newsTip:"🔍 News claim-ah exact-ah search pannu. Date, original source check panni trusted reports-oda compare pannu."
 }
 };
 
-function changeLanguage() {
-  const lang = translations[document.getElementById("language").value];
-  const ids = ["welcome","intro","warning","msgTitle","msgDesc","msgBtn","callTitle","callDesc","callBtn","newsTitle","newsDesc","newsBtn","helpTitle","reportTitle","reportDesc","reportNote"];
-  ids.forEach(id => {
-    document.getElementById(id).textContent = lang[id];
+let currentLang = "th";
+
+function setLanguage(lang) {
+  currentLang = lang;
+  const t = translations[lang] || translations.en;
+
+  Object.keys(t).forEach(key => {
+    const el = document.getElementById(key);
+    if (el && !key.endsWith("Placeholder")) {
+      el.textContent = t[key];
+    }
   });
-  document.getElementById("message").placeholder = lang.msgPlaceholder;
-  document.getElementById("news").placeholder = lang.newsPlaceholder;
-  document.getElementById("safetyList").innerHTML = lang.tips.map(t => "<li>" + t + "</li>").join("");
+
+  if (t.scamPlaceholder) {
+    document.getElementById("scamInput").placeholder = t.scamPlaceholder;
+  }
+  if (t.newsPlaceholder) {
+    document.getElementById("newsInput").placeholder = t.newsPlaceholder;
+  }
+
+  document.documentElement.lang = lang === "ta" ? "ta" : "en";
 }
 
-function checkMessage() {
-  const text = document.getElementById("message").value.trim();
-  const result = document.getElementById("messageResult");
-  const lang = document.getElementById("language").value;
-  if (!text) {
-    result.textContent = lang === "ta" ? "முதலில் ஒரு மெசேஜைப் பதிவிடுங்கள்." : lang === "th" ? "Mudhalla message paste pannu da." : "Please paste a message first.";
-    result.hidden = false;
+document.getElementById("language").addEventListener("change", function () {
+  setLanguage(this.value);
+});
+
+function checkScam() {
+  const input = document.getElementById("scamInput").value.trim();
+  const result = document.getElementById("scamResult");
+  const t = translations[currentLang] || translations.en;
+
+  if (!input) {
+    result.className = "result show";
+    result.textContent = t.scamEmpty;
     return;
   }
 
-  const patterns = [
-    /otp/i, /password/i, /urgent/i, /winner/i, /won.*prize/i,
-    /click.*link/i, /verify.*account/i, /bank.*details/i,
-    /send.*money/i, /account.*blocked/i, /இலவசம்/, /பரிசு/,
-    /otp/, /udane/, /வங்கி/, /பணம் அனுப்பு/
+  const text = input.toLowerCase();
+
+  const groups = [
+    {
+      label: t.urgency,
+      words: ["urgent", "immediately", "account blocked", "suspend", "உடனே", "அவசரம்", "seekiram", "immediate"]
+    },
+    {
+      label: t.money,
+      words: ["prize", "lottery", "won", "cashback", "reward", "free money", "பரிசு", "பணம் வென்ற", "panam", "cash prize"]
+    },
+    {
+      label: t.secrets,
+      words: ["otp", "pin", "password", "cvv", "பகிரவும்", "கடவுச்சொல்", "share otp", "verify your account"]
+    },
+    {
+      label: t.links,
+      words: ["http://", "https://", "bit.ly", "tinyurl", "click here", "pay now", "payment", "link", "கிளிக்", "click pann"]
+    }
   ];
-  const suspicious = patterns.some(p => p.test(text));
 
-  if (suspicious) {
-    result.textContent = lang === "ta"
-      ? "⚠️ எச்சரிக்கை: இந்த மெசேஜில் சந்தேகமான சொற்கள் உள்ளன. லிங்கை அழுத்தவோ, பணம் அனுப்பவோ, OTP பகிரவோ வேண்டாம். அதிகாரப்பூர்வ வழியில் சரிபார்க்கவும்."
-      : lang === "th"
-      ? "⚠️ Warning da! Suspicious words irukku. Link click pannadha, money anuppadha, OTP share pannadha. Official source-la verify pannu."
-      : "⚠️ Caution: This message contains suspicious patterns. Do not click links, send money, or share OTPs. Verify through an official source.";
-  } else {
-    result.textContent = lang === "ta"
-      ? "ℹ️ இந்த எளிய சோதனையில் சந்தேகமான சொற்கள் கண்டறியப்படவில்லை. அதனால் மெசேஜ் பாதுகாப்பானது என்று அர்த்தமல்ல. அனுப்பியவரைச் சரிபார்க்கவும்."
-      : lang === "th"
-      ? "ℹ️ Basic check-la suspicious words kidaikkala. Aana message safe-nu artham illa da. Sender-ah verify pannu."
-      : "ℹ️ No obvious warning patterns were detected. This does not mean the message is safe. Verify the sender independently.";
+  const found = groups.filter(group =>
+    group.words.some(word => text.includes(word))
+  );
+
+  const title = found.length > 0 ? t.scamHigh : t.scamLow;
+  const desc = found.length > 0 ? t.scamHighDesc : t.scamLowDesc;
+
+  result.className = "result show";
+  result.innerHTML = "";
+
+  const heading = document.createElement("strong");
+  heading.textContent = title;
+  result.appendChild(heading);
+
+  const description = document.createElement("div");
+  description.textContent = desc;
+  result.appendChild(description);
+
+  if (found.length > 0) {
+    const list = document.createElement("p");
+    list.textContent = t.patterns + found.map(item => item.label).join(", ");
+    result.appendChild(list);
   }
-  result.hidden = false;
-}
 
-function showCallSafety() {
-  const result = document.getElementById("callResult");
-  const lang = document.getElementById("language").value;
-  result.innerHTML = lang === "ta"
-    ? "1. OTP அல்லது PIN பகிர வேண்டாம்.<br>2. பணம் அனுப்ப அவசரப்பட வேண்டாம்.<br>3. தெரியாதவர் சொல்வதற்காக screen-sharing app நிறுவ வேண்டாம்.<br>4. அழைப்பை துண்டித்து அதிகாரப்பூர்வ எண்ணை நீங்களே தொடர்புகொள்ளுங்கள்."
-    : lang === "th"
-    ? "1. OTP/PIN share pannadha.<br>2. Avasaara pattu money anuppadha.<br>3. Unknown person sonna screen-sharing app install pannadha.<br>4. Call cut pannitu official number-ku neeye call pannu."
-    : "1. Never share OTP or PIN.<br>2. Do not rush into transferring money.<br>3. Never install screen-sharing apps at a stranger's request.<br>4. Hang up and call the official number yourself.";
-  result.hidden = false;
+  const reminder = document.createElement("small");
+  reminder.textContent = t.safe;
+  result.appendChild(reminder);
 }
 
 function checkNews() {
-  const text = document.getElementById("news").value.trim();
+  const input = document.getElementById("newsInput").value.trim();
   const result = document.getElementById("newsResult");
-  const lang = document.getElementById("language").value;
-  if (!text) {
-    result.textContent = lang === "ta" ? "முதலில் செய்தியைப் பதிவிடுங்கள்." : lang === "th" ? "Mudhalla news paste pannu da." : "Please paste a news claim first.";
-  } else {
-    result.textContent = lang === "ta"
-      ? "ℹ️ இந்த முதல் பதிப்பால் செய்தி உண்மையா பொய்யா என்று உறுதிப்படுத்த முடியாது. நம்பகமான பல செய்தி நிறுவனங்கள் மற்றும் அதிகாரப்பூர்வ ஆதாரங்களில் சரிபார்க்கவும். தேதி மற்றும் அசல் ஆதாரத்தையும் பாருங்கள்."
-      : lang === "th"
-      ? "ℹ️ Indha first version news true-ah fake-ah nu confirm panna mudiyadhu da. Multiple trusted news sources-la check pannu. Date-um original source-um paaru."
-      : "ℹ️ This first version cannot confirm whether the claim is true or false. Check multiple reputable news sources and official statements. Verify the date and original source.";
-  }
-  result.hidden = false;
-}
-</script>
+  const t = translations[currentLang] || translations.en;
 
+  result.className = "result show";
+  result.innerHTML = "";
+
+  if (!input) {
+    result.textContent = t.newsEmpty;
+    return;
+  }
+
+  const heading = document.createElement("strong");
+  heading.textContent = t.newsResult;
+  result.appendChild(heading);
+
+  const description = document.createElement("div");
+  description.textContent = t.newsDesc;
+  result.appendChild(description);
+
+  const tip = document.createElement("small");
+  tip.textContent = t.newsTip;
+  result.appendChild(tip);
+}
+
+setLanguage("th");
+</script>
 </body>
 </html>
