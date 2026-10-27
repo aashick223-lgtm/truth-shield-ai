@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Truth Shield AI</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #071426;
+  color: white;
+}
+
+header {
+  padding: 22px 16px;
+  text-align: center;
+  background: #10294a;
+  border-bottom: 2px solid #21d4a4;
+}
+
+.logo {
+  font-size: 42px;
+}
+
+header h1 {
+  margin: 8px 0;
+  color: #42e8bd;
+}
+
+header p {
+  color: #d2deed;
+}
+
+select, textarea, button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+select, textarea {
+  background: #132943;
+  color: white;
+  border: 1px solid #49617b;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+main {
+  max-width: 650px;
+  margin: auto;
+  padding: 18px;
+}
+
+.card {
+  background: #10233b;
+  border: 1px solid #263f5d;
+  padding: 18px;
+  margin: 18px 0;
+  border-radius: 16px;
+}
+
+.card h2 {
+  color: #42e8bd;
+  font-size: 21px;
+}
+
+button {
+  background: #20d5a5;
+  color: #061629;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.result {
+  margin-top: 14px;
+  padding: 14px;
+  background: #192f49;
+  border-radius: 10px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.note {
+  color: #c1d1e4;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #bdcde0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🛡️</div>
+  <h1>Truth Shield AI</h1>
+  <p>Your Digital Safety Companion</p>
+  <label for="language">Choose Language / மொழி தேர்வு</label>
+  <select id="language" onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="ta">தமிழ்</option>
+    <option value="th">Thanglish</option>
+  </select>
+</header>
+
+<main>
+
+<section class="card">
+  <h2 id="welcome">Stay Safe. Think Before You Trust.</h2>
+  <p id="intro">Check suspicious messages, learn call safety, and verify news carefully.</p>
+  <p class="note" id="warning">
+    This first version uses simple warning rules. It cannot guarantee whether
+    a message or news story is true or false.
+  </p>
+</section>
+
+<section class="card">
+  <h2 id="msgTitle">📩 Scam Message Checker</h2>
+  <p id="msgDesc">Paste a suspicious SMS, WhatsApp message, or email.</p>
+  <textarea id="message" placeholder="Paste your message here..."></textarea>
+  <button onclick="checkMessage()" id="msgBtn">Check Message</button>
+  <div id="messageResult" class="result" hidden></div>
+</section>
+
+<section class="card">
+  <h2 id="callTitle">📞 Scam Call Safety</h2>
+  <p id="callDesc">Received a suspicious phone call? Follow these safety steps.</p>
+  <button onclick="showCallSafety()" id="callBtn">Show Safety Tips</button>
+  <div id="callResult" class="result" hidden></div>
+</section>
+
+<section class="card">
+  <h2 id="newsTitle">📰 Fake News Verification</h2>
+  <p id="newsDesc">Paste a news claim to get a basic risk warning.</p>
+  <textarea id="news" placeholder="Paste a news claim here..."></textarea>
+  <button onclick="checkNews()" id="newsBtn">Check News</button>
+  <div id="newsResult" class="result" hidden></div>
+</section>
+
+<section class="card">
+  <h2 id="helpTitle">🔐 Golden Safety Rules</h2>
+  <ul id="safetyList">
+    <li>Never share OTP, PIN, or passwords.</li>
+    <li>Never install apps at a stranger's request.</li>
+    <li>Do not transfer money because of threats.</li>
+    <li>Verify news with multiple reliable sources.</li>
+    <li>Ask a trusted person if you are unsure.</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2 id="reportTitle">🚨 Report Cyber Fraud (India)</h2>
+  <p id="reportDesc">If money has been lost to cyber fraud, contact the official helpline immediately.</p>
+  <p><strong>Cyber Fraud Helpline: 1930</strong></p>
+  <p>Official website: <a href="https://www.cybercrime.gov.in" target="_blank" rel="noopener noreferrer" style="color:#42e8bd">cybercrime.gov.in</a></p>
+  <p class="note" id="reportNote">Use official channels. Never share your OTP with anyone claiming to help.</p>
+</section>
+
+</main>
+
+<footer>
+  🛡️ Truth Shield AI | Think Before You Trust
+  <p>Educational safety tool — not a guarantee of authenticity.</p>
+</footer>
+
+<script>
+const translations = {
+en: {
+welcome:"Stay Safe. Think Before You Trust.",
+intro:"Check suspicious messages, learn call safety, and verify news carefully.",
+warning:"This first version uses simple warning rules. It cannot guarantee whether a message or news story is true or false.",
+msgTitle:"📩 Scam Message Checker",
+msgDesc:"Paste a suspicious SMS, WhatsApp message, or email.",
+msgBtn:"Check Message",
+msgPlaceholder:"Paste your message here...",
+callTitle:"📞 Scam Call Safety",
+callDesc:"Received a suspicious phone call? Follow these safety steps.",
+callBtn:"Show Safety Tips",
+newsTitle:"📰 Fake News Verification",
+newsDesc:"Paste a news claim to get a basic risk warning.",
+newsBtn:"Check News",
+newsPlaceholder:"Paste a news claim here...",
+helpTitle:"🔐 Golden Safety Rules",
+reportTitle:"🚨 Report Cyber Fraud (India)",
+reportDesc:"If money has been lost to cyber fraud, contact the official helpline immediately.",
+reportNote:"Use official channels. Never share your OTP with anyone claiming to help.",
+tips:["Never share OTP, PIN, or passwords.","Never install apps at a stranger's request.","Do not transfer money because of threats.","Verify news with multiple reliable sources.","Ask a trusted person if you are unsure."]
+},
+ta: {
+welcome:"பாதுகாப்பாக இருங்கள். யோசித்து நம்புங்கள்.",
+intro:"சந்தேகமான மெசேஜ்களைச் சரிபார்த்து, அழைப்பு பாதுகாப்பு மற்றும் செய்திகளைப் பற்றி தெரிந்துகொள்ளுங்கள்.",
+warning:"இந்த முதல் பதிப்பு எளிய விதிகளைப் பயன்படுத்துகிறது. செய்தி உண்மையா பொய்யா என்பதை உறுதியாகக் கூற முடியாது.",
+msgTitle:"📩 மோசடி மெசேஜ் சரிபார்ப்பு",
+msgDesc:"சந்தேகமான SMS அல்லது WhatsApp மெசேஜை இங்கே பதிவிடுங்கள்.",
+msgBtn:"மெசேஜை சரிபார்",
+msgPlaceholder:"மெசேஜை இங்கே பதிவிடுங்கள்...",
+callTitle:"📞 மோசடி அழைப்பு பாதுகாப்பு",
+callDesc:"சந்தேகமான அழைப்பு வந்ததா? பாதுகாப்பு வழிமுறைகளைப் பாருங்கள்.",
+callBtn:"பாதுகாப்பு வழிகளைக் காட்டு",
+newsTitle:"📰 போலிச் செய்தி சரிபார்ப்பு",
+newsDesc:"செய்தியைப் பதிவிட்டு அடிப்படை எச்சரிக்கையைப் பெறுங்கள்.",
+newsBtn:"செய்தியைச் சரிபார்",
+newsPlaceholder:"செய்தியை இங்கே பதிவிடுங்கள்...",
+helpTitle:"🔐 முக்கியமான பாதுகாப்பு விதிகள்",
+reportTitle:"🚨 சைபர் மோசடியைப் புகாரளிக்கவும்",
+reportDesc:"சைபர் மோசடியில் பணத்தை இழந்தால் உடனடியாக அதிகாரப்பூர்வ உதவி எண்ணைத் தொடர்புகொள்ளுங்கள்.",
+reportNote:"அதிகாரப்பூர்வ வழிகளைப் பயன்படுத்துங்கள். OTP-ஐ யாரிடமும் பகிர வேண்டாம்.",
+tips:["OTP, PIN, கடவுச்சொல்லை யாரிடமும் பகிர வேண்டாம்.","தெரியாதவர் சொல்வதற்காக ஆப் நிறுவ வேண்டாம்.","மிரட்டலுக்கு பயந்து பணம் அனுப்ப வேண்டாம்.","பல நம்பகமான ஆதாரங்களில் செய்தியைச் சரிபார்க்கவும்.","சந்தேகம் இருந்தால் நம்பகமானவரிடம் ஆலோசனை கேளுங்கள்."]
+},
+th: {
+welcome:"Safe-ah iru. Yosichu nambu!",
+intro:"Suspicious message check pannu, call safety tips paaru, news verify pannu.",
+warning:"Idhu basic warning rules use pannum first version. Message true-ah false-ah nu guarantee panna mudiyadhu.",
+msgTitle:"📩 Scam Message Checker",
+msgDesc:"Doubt-aana SMS, WhatsApp message illa email-ah paste pannu.",
+msgBtn:"Message Check Pannu",
+msgPlaceholder:"Message-ah inga paste pannu...",
+callTitle:"📞 Scam Call Safety",
+callDesc:"Suspicious call vandhucha? Indha safety tips follow pannu.",
+callBtn:"Safety Tips Kaatu",
+newsTitle:"📰 Fake News Verification",
+newsDesc:"News claim-ah paste panni basic warning check pannu.",
+newsBtn:"News Check Pannu",
+newsPlaceholder:"News-ah inga paste pannu...",
+helpTitle:"🔐 Mukkiyamaana Safety Rules",
+reportTitle:"🚨 Cyber Fraud Report (India)",
+reportDesc:"Cyber fraud-la money poirundha udane official helpline-ah contact pannu.",
+reportNote:"Official channels mattum use pannu. Help panrom nu solravanga kittayum OTP share pannadha.",
+tips:["OTP, PIN, password yaar kittayum share pannadha.","Theriyaadhavanga sonna app install pannadha.","Threat pannina bayandhu money transfer pannadha.","Reliable sources-la news verify pannu.","Doubt irundha trusted person kitta kelu."]
+}
+};
+
+function changeLanguage() {
+  const lang = translations[document.getElementById("language").value];
+  const ids = ["welcome","intro","warning","msgTitle","msgDesc","msgBtn","callTitle","callDesc","callBtn","newsTitle","newsDesc","newsBtn","helpTitle","reportTitle","reportDesc","reportNote"];
+  ids.forEach(id => {
+    document.getElementById(id).textContent = lang[id];
+  });
+  document.getElementById("message").placeholder = lang.msgPlaceholder;
+  document.getElementById("news").placeholder = lang.newsPlaceholder;
+  document.getElementById("safetyList").innerHTML = lang.tips.map(t => "<li>" + t + "</li>").join("");
+}
+
+function checkMessage() {
+  const text = document.getElementById("message").value.trim();
+  const result = document.getElementById("messageResult");
+  const lang = document.getElementById("language").value;
+  if (!text) {
+    result.textContent = lang === "ta" ? "முதலில் ஒரு மெசேஜைப் பதிவிடுங்கள்." : lang === "th" ? "Mudhalla message paste pannu da." : "Please paste a message first.";
+    result.hidden = false;
+    return;
+  }
+
+  const patterns = [
+    /otp/i, /password/i, /urgent/i, /winner/i, /won.*prize/i,
+    /click.*link/i, /verify.*account/i, /bank.*details/i,
+    /send.*money/i, /account.*blocked/i, /இலவசம்/, /பரிசு/,
+    /otp/, /udane/, /வங்கி/, /பணம் அனுப்பு/
+  ];
+  const suspicious = patterns.some(p => p.test(text));
+
+  if (suspicious) {
+    result.textContent = lang === "ta"
+      ? "⚠️ எச்சரிக்கை: இந்த மெசேஜில் சந்தேகமான சொற்கள் உள்ளன. லிங்கை அழுத்தவோ, பணம் அனுப்பவோ, OTP பகிரவோ வேண்டாம். அதிகாரப்பூர்வ வழியில் சரிபார்க்கவும்."
+      : lang === "th"
+      ? "⚠️ Warning da! Suspicious words irukku. Link click pannadha, money anuppadha, OTP share pannadha. Official source-la verify pannu."
+      : "⚠️ Caution: This message contains suspicious patterns. Do not click links, send money, or share OTPs. Verify through an official source.";
+  } else {
+    result.textContent = lang === "ta"
+      ? "ℹ️ இந்த எளிய சோதனையில் சந்தேகமான சொற்கள் கண்டறியப்படவில்லை. அதனால் மெசேஜ் பாதுகாப்பானது என்று அர்த்தமல்ல. அனுப்பியவரைச் சரிபார்க்கவும்."
+      : lang === "th"
+      ? "ℹ️ Basic check-la suspicious words kidaikkala. Aana message safe-nu artham illa da. Sender-ah verify pannu."
+      : "ℹ️ No obvious warning patterns were detected. This does not mean the message is safe. Verify the sender independently.";
+  }
+  result.hidden = false;
+}
+
+function showCallSafety() {
+  const result = document.getElementById("callResult");
+  const lang = document.getElementById("language").value;
+  result.innerHTML = lang === "ta"
+    ? "1. OTP அல்லது PIN பகிர வேண்டாம்.<br>2. பணம் அனுப்ப அவசரப்பட வேண்டாம்.<br>3. தெரியாதவர் சொல்வதற்காக screen-sharing app நிறுவ வேண்டாம்.<br>4. அழைப்பை துண்டித்து அதிகாரப்பூர்வ எண்ணை நீங்களே தொடர்புகொள்ளுங்கள்."
+    : lang === "th"
+    ? "1. OTP/PIN share pannadha.<br>2. Avasaara pattu money anuppadha.<br>3. Unknown person sonna screen-sharing app install pannadha.<br>4. Call cut pannitu official number-ku neeye call pannu."
+    : "1. Never share OTP or PIN.<br>2. Do not rush into transferring money.<br>3. Never install screen-sharing apps at a stranger's request.<br>4. Hang up and call the official number yourself.";
+  result.hidden = false;
+}
+
+function checkNews() {
+  const text = document.getElementById("news").value.trim();
+  const result = document.getElementById("newsResult");
+  const lang = document.getElementById("language").value;
+  if (!text) {
+    result.textContent = lang === "ta" ? "முதலில் செய்தியைப் பதிவிடுங்கள்." : lang === "th" ? "Mudhalla news paste pannu da." : "Please paste a news claim first.";
+  } else {
+    result.textContent = lang === "ta"
+      ? "ℹ️ இந்த முதல் பதிப்பால் செய்தி உண்மையா பொய்யா என்று உறுதிப்படுத்த முடியாது. நம்பகமான பல செய்தி நிறுவனங்கள் மற்றும் அதிகாரப்பூர்வ ஆதாரங்களில் சரிபார்க்கவும். தேதி மற்றும் அசல் ஆதாரத்தையும் பாருங்கள்."
+      : lang === "th"
+      ? "ℹ️ Indha first version news true-ah fake-ah nu confirm panna mudiyadhu da. Multiple trusted news sources-la check pannu. Date-um original source-um paaru."
+      : "ℹ️ This first version cannot confirm whether the claim is true or false. Check multiple reputable news sources and official statements. Verify the date and original source.";
+  }
+  result.hidden = false;
+}
+</script>
+
+</body>
+</html>
